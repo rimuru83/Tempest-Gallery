@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tempest Gallery</title>
+
+    <style>
+        body {
+            font-family: 'Comic Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light Gray */
+            color: #333; /* Dark Gray Text Color */
+        }
+
+        .cover-photo {
+            height: 200px; /* Adjust the height as needed */
+            background-image: url('https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/cover.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Black with 50% Transparency */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff; /* White Text Color */
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        #navbar {
+            background-color: #29465B; /* Dark Blue */
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #navbar a {
+            display: inline-block;
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition for background color and text color */
+        }
+
+        #navbar a:hover {
+            background-color: #1E2A38; /* Darker Blue on hover */
+            color: #fff; /* White text on hover */
+        }
+
+        #navbar a.clicked {
+            background-color: #87CEEB; /* Sky Blue for the active button */
+            color: #fff; /* White text for the active button */
+        }
+
+        #gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .heart-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #87CEEB; /* Sky Blue heart initially */
+            border: none;
+            cursor: pointer;
+            font-size: 24px; /* Adjust the font size as needed */
+            color: #fff;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .heart-button.clicked {
+            transform: scale(1.5);
+            background-color: #87CEEB; /* Sky Blue heart when clicked */
+        }
+
+        .slimes-container {
+            position: relative;
+        }
+
+        .slimes {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .pop-up-message {
+            position: absolute;
+            bottom: 100%;
+            right: 10px;
+            background-color: #87CEEB; /* Sky Blue background for the pop-up */
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1;
+        }
+    </style>
+  <style>
+        /* Your existing styles */
+
+        #gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 20px;
+        }
+
+        @media (min-width: 768px) {
+            /* Adjust the number of photos per row on larger screens */
+            #gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-photo">
+        <div class="overlay">
+            <h1>Tempest Gallery</h1>
+        </div>
+    </div>
+
+    <div id="navbar">
+        <a href="#home" onclick="handleNavigation(this)">Home</a>
+        <a href="#feedback" onclick="handleNavigation(this)">Customer Feedback</a>
+        <a href="#tempest-photos" onclick="handleNavigation(this)">Tempest Photos</a>
+  </div>
+ <!-- Introduction Section -->
+    <section id="introduction">
+        <div class="container">
+            <h2>Welcome to Tempest Gallery!</h2>
+            <p>
+                These heartwarming photos were generously shared by our customers using our manga.
+              Without any request on our part, they willingly provided these photos because they genuinely appreciate our service. Among the hundreds of pictures they've shared, we've carefully selected the best shots they provided.
+            </p>
+        </div>
+    </section>
+    <div id="gallery">
+        <!-- Image 1 -->
+        <div class="image-container" id="image1">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/01.jpeg" alt="Image 1">
+            <button class="heart-button" onclick="handleLike(1)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes1">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage1">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="image-container" id="image2">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/02.jpeg" alt="Image 2">
+            <button class="heart-button" onclick="handleLike(2)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes2">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage2">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="image-container" id="image3">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/03.jpeg" alt="Image 3">
+            <button class="heart-button" onclick="handleLike(3)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes3">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage3">Thank you!</div>
+            </div>
+        </div>
+   
+<!-- Image 4 -->
+        <div class="image-container" id="image4">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/04.jpeg" alt="Image 4">
+            <button class="heart-button" onclick="handleLike(4)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes4">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage4">Thank you!</div>
+            </div>
+        </div>
+   <!-- Image 5 -->
+        <div class="image-container" id="image5">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/05.jpeg" alt="Image 5">
+            <button class="heart-button" onclick="handleLike(5)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes5">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage5">Thank you!</div>
+            </div>
+        </div>
+      <!-- Image 6 -->
+        <div class="image-container" id="image6">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/06.jpeg" alt="Image 6">
+            <button class="heart-button" onclick="handleLike(6)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes6">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage6">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 7 -->
+        <div class="image-container" id="image7">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/07.jpeg" alt="Image 7">
+            <button class="heart-button" onclick="handleLike(7)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes7">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage7">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 8 -->
+        <div class="image-container" id="image8">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/08.jpeg" alt="Image 8">
+            <button class="heart-button" onclick="handleLike(8)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes8">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage8">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 9 -->
+        <div class="image-container" id="image9">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/09.jpeg" alt="Image 9">
+            <button class="heart-button" onclick="handleLike(9)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes9">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage9">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 10 -->
+        <div class="image-container" id="image10">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/10.jpeg" alt="Image 10">
+            <button class="heart-button" onclick="handleLike(10)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes10">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage10">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 11 -->
+        <div class="image-container" id="image11">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/11.jpeg" alt="Image 11">
+            <button class="heart-button" onclick="handleLike(11)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes11">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage11">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 12 -->
+        <div class="image-container" id="image12">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/12.jpeg" alt="Image 12">
+            <button class="heart-button" onclick="handleLike(12)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes12">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage12">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 13 -->
+        <div class="image-container" id="image13">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/13.jpeg" alt="Image 13">
+            <button class="heart-button" onclick="handleLike(13)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes13">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage13">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 14 -->
+        <div class="image-container" id="image14">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/14.jpeg" alt="Image 14">
+            <button class="heart-button" onclick="handleLike(14)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes14">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage14">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 15 -->
+        <div class="image-container" id="image15">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/15.jpeg" alt="Image 15">
+            <button class="heart-button" onclick="handleLike(15)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes15">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage15">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 16 -->
+        <div class="image-container" id="image16">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/16.jpeg" alt="Image 16">
+            <button class="heart-button" onclick="handleLike(16)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes16">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage16">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 17 -->
+        <div class="image-container" id="image17">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/17.jpeg" alt="Image 17">
+            <button class="heart-button" onclick="handleLike(17)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes17">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage17">Thank you!</div>
+            </div>
+        </div>
+
+        <!-- Image 18 -->
+        <div class="image-container" id="image18">
+            <img src="https://raw.githubusercontent.com/rimuru83/Obscured-Slime-Pages-PH/main/images/Tempest%20Gallery/18.jpeg" alt="Image 18">
+            <button class="heart-button" onclick="handleLike(18)">&hearts;</button>
+            <div class="slimes-container">
+                <div class="slimes" id="slimes18">0 Slimes</div>
+                <!-- Pop-up message -->
+                <div class="pop-up-message" id="popUpMessage18">Thank you!</div>
+            </div>
+        </div>
+
+      
+    <script>
+        function handleLike(imageId) {
+            // Replace the console.log with logic to send a request to your server to record the like
+            console.log(`Liked image ${imageId}`);
+
+            // Update the slime count
+            const slimeElement = document.getElementById(`slimes${imageId}`);
+            const currentSlimes = parseInt(slimeElement.innerText, 10);
+            slimeElement.innerText = `${currentSlimes + 1} Slimes`;
+
+            // Check if the Slimes count is a multiple of 50
+            if ((currentSlimes + 1) % 10 === 0) {
+                // Show the pop-up message
+                const popUpMessage = document.getElementById(`popUpMessage${imageId}`);
+                popUpMessage.style.display = 'block';
+
+                // Hide the pop-up message after a delay
+                setTimeout(() => {
+                    popUpMessage.style.display = 'none';
+                }, 2000); // 2000 milliseconds (2 seconds)
+            }
+
+            // Add the "clicked" class to trigger the pop effect
+            const heartButton = document.querySelector(`#gallery #image${imageId} .heart-button`);
+            heartButton.classList.add('clicked');
+
+            // Remove the "clicked" class after a short delay
+            setTimeout(() => {
+                heartButton.classList.remove('clicked');
+            }, 200);
+        }
+
+        function handleNavigation(clickedButton) {
+            // Remove the "clicked" class from all buttons
+            const buttons = document.querySelectorAll('#navbar a');
+            buttons.forEach(button => button.classList.remove('clicked'));
+
+            // Add the "clicked" class to the clicked button
+            clickedButton.classList.add('clicked');
+        }
+    </script>
+</body>
+</html>
